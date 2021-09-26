@@ -11,9 +11,8 @@ const Manager = require("./lib/Manager");
 // Employee Array
 const employeeArray = []
 
-function addNewEmployee() {
-    return inquirer
-        .prompt(
+const addNewEmployee = () => {
+    return inquirer.prompt(
             {
                 type: 'text',
                 name: 'name',
@@ -55,7 +54,17 @@ function addNewEmployee() {
         //   this.Employee = new Employee(name);
   
         // });
-    }
+}
+
+const addEngineer = () => {
+    
+}
+const addIntern = () => {
+    
+}
+const addManager = () => {
+    
+}
     
     // inquirer
     //     .prompt({

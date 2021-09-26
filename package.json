@@ -1,0 +1,28 @@
+{
+  "name": "team-profile-generator",
+  "version": "1.0.0",
+  "description": "Week 10 Challenge for the Coding Bootcamp.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jazzmbarry/team-profile-generator.git"
+  },
+  "author": "jazzmbarry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jazzmbarry/team-profile-generator/issues"
+  },
+  "homepage": "https://github.com/jazzmbarry/team-profile-generator#readme",
+  "dependencies": {
+    "inquirer": "^8.1.5"
+  },
+  "devDependencies": {
+    "jest": "^27.2.2"
+  }
+}

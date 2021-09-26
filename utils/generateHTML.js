@@ -1,9 +1,10 @@
 const fs = require('fs');
+const templateData = require('./src/page-template.js');
 
 // writing files
 const writeFile = fileContent => {
   return new Promise((resolve, reject) => {
-    fs.writeFile('./dist/index.html', fileContent, err => {
+    fs.writeFile('./dist/index.html', templateData, err => {
       if (err) {
         reject(err);
         return;

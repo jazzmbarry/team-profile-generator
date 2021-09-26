@@ -1,6 +1,5 @@
 // Packages
 const inquirer = require('inquirer')
-const fs = require("fs")
 
 // Module Exports
 const Employee = require('./lib/Employee')
@@ -57,13 +56,13 @@ const addNewEmployee = () => {
 }
 
 const addEngineer = () => {
-    
+
 }
 const addIntern = () => {
-    
+
 }
 const addManager = () => {
-    
+
 }
     
     // inquirer

@@ -32,7 +32,7 @@ const pageTemplate = (data) => {
         </div>
       </header>
       <main class="container">
-        <!-- ${generateEmployees(employees)} -->
+        ${generateEmployees(data)}
       </main>
       <footer class="">
         <h3 class="text-dark">&copy;2020 by ${data.name}</h3>

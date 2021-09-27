@@ -1,5 +1,5 @@
 const fs = require('fs');
-const templateData = require('./src/pageTemplate.js');
+const templateData = require('../src/pageTemplate.js');
 
 // writing files
 const writeFile = fileContent => {

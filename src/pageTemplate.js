@@ -1,4 +1,4 @@
-const generateEmployees = () => {
+const generateEmployees = (data) => {
     return `
     <div class="row col-2">
         <div>${data.name}</div>
@@ -9,7 +9,7 @@ const generateEmployees = () => {
     `
 }
 
-module.exports = templateData => {
+const pageTemplate = (data) => {
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -35,9 +35,11 @@ module.exports = templateData => {
         <!-- ${generateEmployees(employees)} -->
       </main>
       <footer class="">
-        <h3 class="text-dark">&copy;2020 by ${header.name}</h3>
+        <h3 class="text-dark">&copy;2020 by ${data.name}</h3>
       </footer>
     </body>
     </html>    
     `
 }
+
+module.exports = pageTemplate

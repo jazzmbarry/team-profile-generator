@@ -2,16 +2,19 @@
 const inquirer = require('inquirer')
 
 // Module Exports
-const Employee = require('./lib/Employee')
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
-const Manager = require("./lib/Manager");
+const Employee = require('./lib/Employee.js')
+const Engineer = require("./lib/Engineer.js");
+const Intern = require("./lib/Intern.js");
+const Manager = require("./lib/Manager.js");
+const pageTemplate = require('./src/pageTemplate.js');
+const { writeFile, copyFile } = require('./utils/generateHTML.js');
+
 
 // Employee Array
 const employeeArray = []
 
 const addNewEmployee = () => {
-    return inquirer.prompt(
+    return inquirer.prompt([
             {
                 type: 'text',
                 name: 'name',
@@ -37,17 +40,17 @@ const addNewEmployee = () => {
                 default: 'Employee',
                 Choices: ["Employee", "Engineer", "Intern", "Manager"]
             }
-            )
-            .then(({ role }) => {
-                if (role === "Employee") {
-                } else if (role === "Engineer") {
-                    addEngineer()
-                } else if (role === "Intern") {
-                    addIntern()
-                } else if (role === "Manager") {
-                    addManager()
-                }
-              })
+        ])
+        // .then(({ role }) => {
+        //     if (role === "Employee") {
+        //     } else if (role === "Engineer") {
+        //         addEngineer()
+        //     } else if (role === "Intern") {
+        //         addIntern()
+        //     } else if (role === "Manager") {
+        //         addManager()
+        //     }
+        //     })
             
         // .then(({ name }) => {
         //   this.Employee = new Employee(name);
@@ -56,12 +59,14 @@ const addNewEmployee = () => {
 }
 
 const addEngineer = () => {
-
+    console.log('test1')
 }
 const addIntern = () => {
+    console.log('test2')
 
 }
 const addManager = () => {
+    console.log('test3')
 
 }
     
@@ -111,7 +116,16 @@ const addManager = () => {
     //         }
     //     })
         
+function init() {
+    addNewEmployee()
+    .then(data => {
+        return pageTemplate(data)})
+    .then(info => {
+        return writeFile
+    })
+    .catch(err => {
+        console.log(err)
+      })
+}
 
-    
-
-addNewEmployee()
+init();

@@ -12,8 +12,9 @@ const pageTemplate = require('./src/pageTemplate.js');
 const { writeFile, copyFile } = require('./utils/generateHTML.js');
 
 
+
 // Employee Array
-const employeeArray = []
+let employeeArray = []
 
 const addNewEmployee = () => {
     return inquirer.prompt([
@@ -84,9 +85,6 @@ const addManager = () => {
     ])
 }
 
-const roleSwitch = () => {
-
-}
 
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, err => {
@@ -103,7 +101,23 @@ function init() {
         .then(data => {
             return pageTemplate(data)
         })
+        // .then(data => {
+        //     switch (data.role) {
+        //         case 'Engineer':            
+                 
+        //         return pageTemplate(addEngineer())
+                                       
+        //         case 'Intern':            
+                    
+        //         return pageTemplate(addIntern())
+                    
+        //         case 'Manager':            
+                   
+        //         return pageTemplate(addManager())
+        //     }
+        // })
         .then(info => {
+            // console.log(employeeArray)
             return writeToFile('./dist/index.html', info)
         })
         .catch(err => {

@@ -1,10 +1,51 @@
+const inquirer = require("inquirer")
+
+const generateRole = data => {
+  switch (data.role) {
+  case 'Engineer':            
+    
+  return inquirer.prompt([
+    {
+      type: 'text',
+      name: 'github',
+      message: 'What is the GitHub username for this Employee?'
+  }
+])
+                          
+  case 'Intern':            
+      
+  return inquirer.prompt([
+    {
+        type: 'text',
+        name: 'school',
+        message: "What is the name of this Intern's School?"
+    }
+])
+  
+  case 'Manager':            
+      
+  return inquirer.prompt([
+    {
+        type: 'number',
+        name: 'officeNumber',
+        message: "What is the Manager's Office Number?"
+    }
+])
+
+  }
+
+}
+
 const generateEmployees = (data) => {
     return `
     <div class="row col-2">
         <div>${data.name}</div>
         <div>${data.id}</div>
         <a href = "mailto:${data.email}">${data.email}</a>    
-        <div>${data.role}</div>    
+        <div>${data.role}</div>
+        <a href = "github.com/${data.github}">${data.github}</a>
+        <div>${data.officeNumber}</div>
+        <div>${data.school}</div>    
     </div>
     `
 }

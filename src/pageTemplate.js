@@ -3,7 +3,7 @@ const generateEmployees = (data) => {
     <div class="row col-2">
         <div>${data.name}</div>
         <div>${data.id}</div>
-        <div>${data.email}</div>    
+        <a href = "mailto:${data.email}">${data.email}</a>    
         <div>${data.role}</div>    
     </div>
     `

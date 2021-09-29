@@ -4,85 +4,111 @@ const fs = require('fs');
 
 
 // Module Exports
-const Employee = require('./lib/Employee.js')
+// const Employee = require('./lib/Employee.js')
 const Engineer = require("./lib/Engineer.js");
 const Intern = require("./lib/Intern.js");
 const Manager = require("./lib/Manager.js");
 const pageTemplate = require('./src/pageTemplate.js');
-const { writeFile, copyFile } = require('./utils/generateHTML.js');
+// const { writeFile, copyFile } = require('./utils/generateHTML.js');
 
 
 
 // Employee Array
-let employeeArray = []
+const employeeArray = []
 
-const addNewEmployee = () => {
+const createTeam = () => {
+    console.log(
+        `
+        -----------------------------
+
+                TEAM CREATOR
+
+        -----------------------------
+        `
+    )
     return inquirer.prompt([
-        {
-            type: 'text',
-            name: 'name',
-            message: 'What is the name of this Employee?'
-        }
-        ,
-        {
-            type: 'text',
-            name: 'id',
-            message: 'What is the id connected to this Employee?'
-        }
-        ,
-        {
-            type: 'text',
-            name: 'email',
-            message: 'What is the email connected to this Employee?'
-        }
-        ,
         {
             type: 'list',
             name: 'role',
             message: "What position does this Employee hold?",
-            choices: ["Employee", "Engineer", "Intern", "Manager"]
+            choices: ["Engineer", "Intern", "Manager"]
+        }
+        ,
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is your name?'
+        }
+        ,
+        {
+            type: 'input',
+            name: 'id',
+            message: 'What is your ID?'
+        }
+        ,
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is your email?'
         }
     ])
-        // .then(({ role }) => {
-        //     if (role === "Employee") {
-
-        //     } else if (role === "Engineer") {
-        //         addEngineer()
-        //     } else if (role === "Intern") {
-        //         addIntern()
-        //     } else if (role === "Manager") {
-        //         addManager()
-        //     }
-        // })
-
+        .then(({ name, id, email, role }) => {
+            if (role === "Engineer") {
+                addEngineer(name, id, email)
+            } else if (role === "Intern") {
+                addIntern(name, id, email)
+            } else if (role === "Manager") {
+                addManager(name, id, email)
+            }
+        })
 }
 
-const addEngineer = () => {
+const addEngineer = (name, id, email) => {
     return inquirer.prompt([
         {
-            type: 'text',
+            type: 'input',
             name: 'github',
             message: 'What is the GitHub username for this Employee?'
         }
     ])
+        .then(({ github }) => {
+            const engineer = new Engineer(name, id, email, github)
+            employeeArray.push(engineer)
+            init()
+        })
 }
-const addIntern = () => {
+const addIntern = (name, id, email) => {
     return inquirer.prompt([
         {
-            type: 'text',
+            type: 'input',
             name: 'school',
             message: "What is the name of this Intern's School?"
         }
     ])
+        .then(({ school }) => {
+            const intern = new Intern(name, id, email, school)
+            employeeArray.push(intern)
+            init()
+        })
 }
-const addManager = () => {
+const addManager = (name, id, email) => {
     return inquirer.prompt([
         {
-            type: 'number',
+            type: 'input',
             name: 'officeNumber',
-            message: "What is the Manager's Office Number?"
+            message: "What is your Office Number?"
         }
     ])
+        .then(({ officeNumber }) => {
+            const manager = new Manager(name, id, email, officeNumber)
+            employeeArray.push(manager)
+            init()
+        })
+}
+
+const completeTeam = function () {
+    let pageData = pageTemplate(employeeArray)
+    writeToFile('./dist/index.html', pageData)
 }
 
 
@@ -97,32 +123,30 @@ function writeToFile(fileName, data) {
 }
 
 function init() {
-    addNewEmployee()
-        .then(data => {
-            return pageTemplate(data)
-        })
-        // .then(data => {
-        //     switch (data.role) {
-        //         case 'Engineer':            
-                 
-        //         return pageTemplate(addEngineer())
-                                       
-        //         case 'Intern':            
-                    
-        //         return pageTemplate(addIntern())
-                    
-        //         case 'Manager':            
-                   
-        //         return pageTemplate(addManager())
-        //     }
-        // })
-        .then(info => {
-            // console.log(employeeArray)
-            return writeToFile('./dist/index.html', info)
-        })
-        .catch(err => {
-            console.log(err)
-        })
+    return inquirer.prompt([
+        {
+            type: 'confirm',
+            name: 'newEmployee',
+            message: 'Do you want add a new Employee?'
+        }
+    ])
+    .then(({ newEmployee }) => { 
+        if (newEmployee === true) {
+        createTeam()
+    }
+        else {
+        console.log(employeeArray)
+        completeTeam()
+    }})
+    // employeeArray => {
+    //     return pageTemplate(employeeArray)
+    // }
+    // then(info => {
+    //     return writeToFile('./dist/index.html', info)
+    // })
+    // // .catch(err => {
+    // //     console.log(err)
+    // // })}
 }
 
 init();

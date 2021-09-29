@@ -14,7 +14,11 @@ const pageTemplate = require('./src/pageTemplate.js');
 
 
 // Employee Array
-const employeeArray = []
+const managerArray = []
+const engineerArray = []
+const internArray = []
+
+
 
 const createTeam = () => {
     console.log(
@@ -31,7 +35,7 @@ const createTeam = () => {
             type: 'list',
             name: 'role',
             message: "What position does this Employee hold?",
-            choices: ["Engineer", "Intern", "Manager"]
+            choices: [ "Manager", "Engineer", "Intern",]
         }
         ,
         {
@@ -73,7 +77,7 @@ const addEngineer = (name, id, email) => {
     ])
         .then(({ github }) => {
             const engineer = new Engineer(name, id, email, github)
-            employeeArray.push(engineer)
+            engineerArray.push(engineer)
             init()
         })
 }
@@ -87,7 +91,7 @@ const addIntern = (name, id, email) => {
     ])
         .then(({ school }) => {
             const intern = new Intern(name, id, email, school)
-            employeeArray.push(intern)
+            internArray.push(intern)
             init()
         })
 }
@@ -101,13 +105,13 @@ const addManager = (name, id, email) => {
     ])
         .then(({ officeNumber }) => {
             const manager = new Manager(name, id, email, officeNumber)
-            employeeArray.push(manager)
+            managerArray.push(manager)
             init()
         })
 }
 
-const completeTeam = function () {
-    let pageData = pageTemplate(employeeArray)
+const completeTeam = function (managerArray, engineerArray, internArray) {
+    let pageData = pageTemplate(managerArray, engineerArray, internArray)
     writeToFile('./dist/index.html', pageData)
 }
 
@@ -135,9 +139,11 @@ function init() {
         createTeam()
     }
         else {
-        console.log(employeeArray)
-        completeTeam()
+        completeTeam(managerArray, engineerArray, internArray)
     }})
+    .catch(err => {
+        console.log(err);
+      })
     // employeeArray => {
     //     return pageTemplate(employeeArray)
     // }

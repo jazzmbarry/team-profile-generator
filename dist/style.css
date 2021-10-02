@@ -1,0 +1,11 @@
+header .card-header {
+    background-color: purple;
+    font-weight: bold;
+    text-align: center;
+}
+
+footer {
+    background-color: purple;
+    font-weight: bold;
+    text-align: center;
+}

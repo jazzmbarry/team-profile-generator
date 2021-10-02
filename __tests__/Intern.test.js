@@ -3,7 +3,7 @@ const Employee = require('./Employee.test')
 
 
 test('create an Intern Object', () => {
-    const intern = new Intern('Matt', 1, 'me@me.com', 'Intern', 'School');
+    const intern = new Intern('Matt', 1, 'me@me.com', 'School', 'Intern');
 
     expect(intern.name).toBe('Matt')
     expect(intern.id).toBe(1)

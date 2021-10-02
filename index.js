@@ -41,19 +41,19 @@ const createTeam = () => {
         {
             type: 'input',
             name: 'name',
-            message: 'What is your name?'
+            message: "What is the Employee's name?"
         }
         ,
         {
             type: 'input',
             name: 'id',
-            message: 'What is your ID?'
+            message: "What is the Employee's ID?"
         }
         ,
         {
             type: 'input',
             name: 'email',
-            message: 'What is your email?'
+            message: "What is the Employee's email?"
         }
     ])
         .then(({ name, id, email, role }) => {
@@ -100,7 +100,7 @@ const addManager = (name, id, email) => {
         {
             type: 'input',
             name: 'officeNumber',
-            message: "What is your Office Number?"
+            message: "What is the Employee's Office Number?"
         }
     ])
         .then(({ officeNumber }) => {
